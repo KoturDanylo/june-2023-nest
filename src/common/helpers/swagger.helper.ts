@@ -16,17 +16,11 @@ const authResponses = {
 const deleteResponses = {
   204: { description: 'No content' },
 };
-
-const mediaResponses = {
-  415: { description: 'Unsupported Media Type' },
-};
-
 export class SwaggerHelper {
   static setDefaultResponses(document: OpenAPIObject): void {
     for (const key of Object.keys(document.paths)) {
       for (const method of pathMethods) {
         const route = document.paths[key]?.[method];
-        console.log(method);
         if (route) {
           Object.assign(route.responses, generalResponses);
 
