@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  june-2023-postgres:
+    image: postgres:16.1
+    ports:
+      - '${POSTGRES_PORT}:5432'
+    environment:
+      POSTGRES_USER: '${POSTGRES_USER:-user}'
+      POSTGRES_PASSWORD: '${POSTGRES_PASSWORD:-password}'
+      POSTGRES_DB: '${POSTGRES_DB:-june-2023}'
+    volumes:
+      - june-2023-api-db:/var/lib/postgresql/june-2023
+
+  june-2023-redis:
+    image: redis:7.2.3
+    ports:
+      - '${REDIS_PORT:-6379}:6379'
+    command: >
+      --requirepass '${REDIS_PASSWORD:-redispass}'
+    restart: unless-stopped
+
+
+volumes:
+  june-2023-api-db:
+  june-2023-api-s3:
