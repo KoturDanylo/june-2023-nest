@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 
 import { CacheCustom } from '../../../common/decorators/cache-method.decorator';
 import { CreateUserDto } from '../models/dto/request/create-user.dto';
@@ -6,8 +6,8 @@ import { UpdateUserDto } from '../models/dto/request/update-user.dto';
 
 @Injectable()
 export class UserService {
-  private _createUserDto: CreateUserDto;
   private _updateUserDto: UpdateUserDto;
+  private _createUserDto: CreateUserDto;
   public async create(createUserDto: CreateUserDto): Promise<any> {
     this._createUserDto = createUserDto;
     return 'This action adds a new user';
@@ -19,6 +19,7 @@ export class UserService {
 
   @CacheCustom(5000)
   public async findOne(id: number): Promise<string> {
+    throw new UnprocessableEntityException('User not found');
     return `This action returns a #${id} user`;
   }
 
