@@ -38,7 +38,7 @@ export class RedisService {
 
   /**
    * Sets a timeout on a key.
-   * After the timeout, the key will be automatically deleted.
+   * After the timeout, the key will be automatically deleted (in seconds).
    */
   public async expire(key: string, time: number): Promise<number> {
     return await this.redisClient.expire(key, time);
