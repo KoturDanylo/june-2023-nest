@@ -22,7 +22,6 @@ export class UserController {
   ): Promise<string> {
     return await this.userService.update(12, updateUserDto);
   }
-
   @Get(':id')
   public async findOne(@Param('id') id: string): Promise<string> {
     return await this.userService.findOne(+id);
